@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriSense - About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        .hero-bg { background-size: cover; background-position: center; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+    </style>
+    <link rel="icon" href="../favicon.ico">
+    <base href="./" />
+    <!-- base ensures relative links like crop-recommendation.html resolve within sections/ -->
+    <script>
+      // Basic mobile menu toggle and language placeholder to avoid errors
+      document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        if (mobileMenuBtn && mobileNav) {
+          mobileMenuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+        }
+      });
+    </script>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Offline Banner -->
+    <div class="bg-green-600 text-white text-center py-2 text-sm">🌐 Works Partially Offline in Low Connectivity Regions</div>
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <!-- Logo -->
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+              <span class="text-2xl">🌱</span>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-800">AgriSense</h1>
+              <p class="text-xs text-gray-600">AI Crop Recommendation System</p>
+            </div>
+          </div>
+
+          <!-- Language + Mobile Menu -->
+          <div class="flex items-center space-x-4">
+            <select id="languageSelect" class="px-3 py-1 border border-gray-300 rounded-md text-sm">
+              <option value="en">English</option>
+              <option value="hi">हिंदी</option>
+              <option value="kn">ಕನ್ನಡ</option>
+            </select>
+            <button id="mobileMenuBtn" class="md:hidden p-2"><span class="text-2xl">☰</span></button>
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav id="mainNav" class="hidden md:block mt-4">
+          <ul class="flex flex-wrap space-x-6 text-sm">
+            <li><a href="index.html" class="hover:text-green-600" data-translate="nav-home">Home</a></li>
+            <li><a href="crop-recommendation.html" class="hover:text-green-600" data-translate="nav-crop">Crop Recommendation</a></li>
+            <li><a href="disease-detection.html" class="hover:text-green-600" data-translate="nav-disease">Disease Detection</a></li>
+            <li><a href="dashboard.html" class="hover:text-green-600" data-translate="nav-dashboard">Dashboard</a></li>
+            <li><a href="soil-testing.html" class="hover:text-green-600" data-translate="nav-soil">Soil Testing Kit</a></li>
+            <li><a href="about.html" class="text-green-600 font-medium" data-translate="nav-about">About</a></li>
+            <li><a href="contact.html" class="hover:text-green-600" data-translate="nav-contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Mobile Nav -->
+        <nav id="mobileNav" class="hidden md:hidden mt-4 border-t pt-4">
+          <ul class="space-y-2">
+            <li><a href="home.html" class="block py-2" data-translate="nav-home">Home</a></li>
+            <li><a href="crop-recommendation.html" class="block py-2" data-translate="nav-crop">Crop Recommendation</a></li>
+            <li><a href="disease-detection.html" class="block py-2" data-translate="nav-disease">Disease Detection</a></li>
+            <li><a href="dashboard.html" class="block py-2" data-translate="nav-dashboard">Dashboard</a></li>
+            <li><a href="soil-testing.html" class="block py-2" data-translate="nav-soil">Soil Testing Kit</a></li>
+            <li><a href="about.html" class="block py-2 text-green-600 font-medium" data-translate="nav-about">About</a></li>
+            <li><a href="contact.html" class="block py-2" data-translate="nav-contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- About Section (standalone) -->
+      <section id="about" class="page-section py-16">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">About AgriSense</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 class="text-2xl font-semibold mb-6">Our Mission</h3>
+                <p class="text-gray-600 mb-6">
+                  AgriSense is an AI-powered platform aimed at modernizing agriculture through 
+                  intelligent data-driven solutions. The system assists farmers by providing
+                  smart crop recommendations, detecting plant diseases at an early stage, 
+                  and predicting crop yield accurately - helping improve productivity and 
+                  sustainability in farming.
+                </p>
+                <h4 class="text-xl font-semibold mb-4">Key Features</h4>
+                <ul class="space-y-3 text-gray-600">
+                  <li class="flex items-center"><span class="text-green-500 mr-3">✓</span>Multilingual support (English, Hindi, Kannada)</li>
+                  <li class="flex items-center"><span class="text-green-500 mr-3">✓</span>Offline-first PWA for low connectivity regions</li>
+                  <li class="flex items-center"><span class="text-green-500 mr-3">✓</span>IoT sensor integration (future)</li>
+                  <li class="flex items-center"><span class="text-green-500 mr-3">✓</span>Real-time market price tracking</li>
+                  <li class="flex items-center"><span class="text-green-500 mr-3">✓</span>Sustainable farming practices</li>
+                </ul>
+              </div>
+              <div class="bg-gradient-to-r from-green-400 to-blue-500 rounded-xl p-8 text-white">
+                <h3 class="text-2xl font-semibold mb-6">Meet Our Team</h3>
+                <div class="space-y-4">
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center"><span class="text-2xl">👨‍💻</span></div>
+                    <div>
+                      <div class="font-semibold">Basavaraj N</div>
+                      <div class="text-sm opacity-90">Team Lead & AI Developer</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center"><span class="text-2xl">👩‍🔬</span></div>
+                    <div>
+                      <div class="font-semibold">Channaveer H</div>
+                      <div class="text-sm opacity-90">Data Scientist</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center"><span class="text-2xl">🎨</span></div>
+                    <div>
+                      <div class="font-semibold">Chandan Shet</div>
+                      <div class="text-sm opacity-90">UI/UX Designer</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center"><span class="text-2xl">✨</span></div>
+                    <div>
+                      <div class="font-semibold"> Adesh K </div>
+                      <div class="text-sm opacity-90">researach Expert</div>
+                    </div>
+                  </div>
+                
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Company Info -->
+          <div>
+            <div class="flex items-center space-x-3 mb-4">
+              <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"><span class="text-xl">🌱</span></div>
+              <span class="text-xl font-bold">AgriSense</span>
+            </div>
+            <p class="text-gray-300 mb-4">Empowering farmers with AI-powered agricultural solutions for sustainable and profitable farming.</p>
+            <div class="text-sm text-gray-400">© 2025 AgriSense Team | Built with Love </div>
+          </div>
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-gray-300">
+              <li><a href="home.html" class="hover:text-green-400 transition-colors">Home</a></li>
+              <li><a href="crop-recommendation.html" class="hover:text-green-400 transition-colors">Crop Recommendation</a></li>
+              <li><a href="disease-detection.html" class="hover:text-green-400 transition-colors">Disease Detection</a></li>
+              <li><a href="about.html" class="hover:text-green-400 transition-colors">About</a></li>
+              <li><a href="contact.html" class="hover:text-green-400 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <!-- Features -->
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Features</h4>
+            <ul class="space-y-2 text-gray-300">
+              <li>AI Crop Recommendations</li>
+              <li>Disease Detection</li>
+              <li>Yield Predictions</li>
+              <li>Market Price Analysis</li>
+              <li>Multilingual Support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="chatbot.js"></script>
+  </body>
+  </html>

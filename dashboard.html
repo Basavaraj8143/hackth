@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriSense - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Offline Banner -->
+  <div class="bg-green-600 text-white text-center py-2 text-sm">🌐 Works Partially Offline in Low Connectivity Regions</div>
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center"><span class="text-2xl">🌱</span></div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">AgriSense</h1>
+            <p class="text-xs text-gray-600">AI Crop Recommendation System</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <select id="languageSelect" class="px-3 py-1 border border-gray-300 rounded-md text-sm">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+          </select>
+          <button id="mobileMenuBtn" class="md:hidden p-2"><span class="text-2xl">☰</span></button>
+        </div>
+      </div>
+      <nav class="hidden md:block mt-4">
+        <ul class="flex flex-wrap space-x-6 text-sm">
+          <li><a href="index.html" class="hover:text-green-600" data-translate="nav-home">Home</a></li>
+          <li><a href="crop-recommendation.html" class="hover:text-green-600" data-translate="nav-crop">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="hover:text-green-600" data-translate="nav-disease">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="text-green-600 font-medium" data-translate="nav-dashboard">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="hover:text-green-600" data-translate="nav-soil">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="hover:text-green-600" data-translate="nav-about">About</a></li>
+          <li><a href="contact.html" class="hover:text-green-600" data-translate="nav-contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav id="mobileNav" class="hidden md:hidden mt-4 border-t pt-4">
+        <ul class="space-y-2">
+          <li><a href="home.html" class="block py-2">Home</a></li>
+          <li><a href="crop-recommendation.html" class="block py-2">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="block py-2">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="block py-2 text-green-600 font-medium">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="block py-2">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="block py-2">About</a></li>
+          <li><a href="contact.html" class="block py-2">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="page-section bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12" data-translate="dashboard-title">Agricultural Dashboard</h2>
+        <div class="grid lg:grid-cols-3 gap-8">
+          <div class="bg-white rounded-xl p-6 shadow-lg">
+            <h3 class="text-xl font-semibold mb-4">Recommended Crops Distribution</h3>
+            <div class="h-[300px]"><canvas id="cropDistChart"></canvas></div>
+          </div>
+          <div class="bg-white rounded-xl p-6 shadow-lg">
+            <h3 class="text-xl font-semibold mb-4">Predicted Yield per Crop</h3>
+            <div class="h-[300px]"><canvas id="yieldChart"></canvas></div>
+          </div>
+          <div class="bg-white rounded-xl p-6 shadow-lg">
+            <h3 class="text-xl font-semibold mb-4">Market Price Trends</h3>
+            <div class="h-[300px]"><canvas id="priceChart"></canvas></div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-4 gap-6 mt-8">
+          <div class="bg-white rounded-xl p-6 shadow-lg text-center"><div class="text-3xl font-bold text-green-600 mb-2">1,247</div><div class="text-gray-600">Active Farmers</div></div>
+          <div class="bg-white rounded-xl p-6 shadow-lg text-center"><div class="text-3xl font-bold text-blue-600 mb-2">89%</div><div class="text-gray-600">Prediction Accuracy</div></div>
+          <div class="bg-white rounded-xl p-6 shadow-lg text-center"><div class="text-3xl font-bold text-purple-600 mb-2">₹12L</div><div class="text-gray-600">Cost Savings</div></div>
+          <div class="bg-white rounded-xl p-6 shadow-lg text-center"><div class="text-3xl font-bold text-orange-600 mb-2">156</div><div class="text-gray-600">Crop Varieties</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300">
+    <div class="flex items-center space-x-3"><span class="text-xl">✅</span><span id="toastMessage">Success!</span></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4"><div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"><span class="text-xl">🌱</span></div><span class="text-xl font-bold">AgriSense</span></div>
+          <p class="text-gray-300 mb-4">Empowering farmers with AI-powered agricultural solutions for sustainable and profitable farming.</p>
+          <div class="text-sm text-gray-400">© 2025 AgriSense Team | Built for Smart India Hackathon</div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="home.html" class="hover:text-green-400 transition-colors">Home</a></li>
+            <li><a href="crop-recommendation.html" class="hover:text-green-400 transition-colors">Crop Recommendation</a></li>
+            <li><a href="disease-detection.html" class="hover:text-green-400 transition-colors">Disease Detection</a></li>
+            <li><a href="about.html" class="hover:text-green-400 transition-colors">About</a></li>
+            <li><a href="contact.html" class="hover:text-green-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Features</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li>AI Crop Recommendations</li>
+            <li>Disease Detection</li>
+            <li>Yield Predictions</li>
+            <li>Market Price Analysis</li>
+            <li>Multilingual Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="common.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="chatbot.js"></script>
+  </body>
+</html>
+
+<script>
+    // Mobile nav toggle & toast
+    document.getElementById('mobileMenuBtn')?.addEventListener('click', () => document.getElementById('mobileNav')?.classList.toggle('hidden'));
+    function showToast(message){
+      const t=document.getElementById('toast'),m=document.getElementById('toastMessage');m.textContent=message;t.classList.remove('translate-y-full','opacity-0');t.classList.add('translate-y-0','opacity-100');setTimeout(()=>{t.classList.add('translate-y-full','opacity-0');t.classList.remove('translate-y-0','opacity-100')},2500)
+    }
+
+    // Chart Functions
+    function initializeCharts() {
+        // Wait a bit for the DOM to be ready
+        setTimeout(() => {
+            createCropDistributionChart();
+            createYieldChart();
+            createPriceChart();
+        }, 100);
+    }
+
+    function createCropDistributionChart() {
+        const ctx = document.getElementById('cropDistChart');
+        if (!ctx) return;
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Wheat', 'Rice', 'Maize', 'Others'],
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: ['#22c55e', '#16a34a', '#15803d', '#166534']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function createYieldChart() {
+        const ctx = document.getElementById('yieldChart');
+        if (!ctx) return;
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Rice', 'Wheat', 'Maize', 'Cotton'],
+                datasets: [{
+                    label: 'Yield (quintals/acre)',
+                    data: [28, 35, 42, 18],
+                    backgroundColor: '#3b82f6'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    function createPriceChart() {
+        const ctx = document.getElementById('priceChart');
+        if (!ctx) return;
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [
+                    {
+                        label: 'Wheat Price (₹/qtl)',
+                        data: [2200, 2250, 2300, 2280, 2350],
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    initializeCharts();
+</script>
+</body>
+</html>

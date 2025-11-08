@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriSense - Contact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Offline Banner -->
+  <div class="bg-green-600 text-white text-center py-2 text-sm">🌐 Works Partially Offline in Low Connectivity Regions</div>
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center"><span class="text-2xl">🌱</span></div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">AgriSense</h1>
+            <p class="text-xs text-gray-600">AI Crop Recommendation System</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <select id="languageSelect" class="px-3 py-1 border border-gray-300 rounded-md text-sm">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+          </select>
+          <button id="mobileMenuBtn" class="md:hidden p-2"><span class="text-2xl">☰</span></button>
+        </div>
+      </div>
+      <nav class="hidden md:block mt-4">
+        <ul class="flex flex-wrap space-x-6 text-sm">
+          <li><a href="index.html" class="hover:text-green-600" data-translate="nav-home">Home</a></li>
+          <li><a href="crop-recommendation.html" class="hover:text-green-600" data-translate="nav-crop">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="hover:text-green-600" data-translate="nav-disease">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="hover:text-green-600" data-translate="nav-dashboard">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="hover:text-green-600" data-translate="nav-soil">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="hover:text-green-600" data-translate="nav-about">About</a></li>
+          <li><a href="contact.html" class="text-green-600 font-medium" data-translate="nav-contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav id="mobileNav" class="hidden md:hidden mt-4 border-t pt-4">
+        <ul class="space-y-2">
+          <li><a href="home.html" class="block py-2">Home</a></li>
+          <li><a href="crop-recommendation.html" class="block py-2">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="block py-2">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="block py-2">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="block py-2">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="block py-2">About</a></li>
+          <li><a href="contact.html" class="block py-2 text-green-600 font-medium">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Contact Section -->
+    <section id="contact" class="page-section bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-12" data-translate="contact-title">Contact Us</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <form id="contactForm">
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Your Name</label>
+                    <input type="text" id="contactName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Email Address</label>
+                    <input type="email" id="contactEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Message</label>
+                    <textarea id="contactMessage" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required></textarea>
+                  </div>
+                  <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors">Send Message</button>
+                </div>
+              </form>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <h3 class="text-xl font-semibold mb-6">Get in Touch</h3>
+              <div class="space-y-6">
+                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"><span class="text-2xl">📧</span></div><div><div class="font-semibold">Email</div><div class="text-gray-600">contact@agrisense.in</div></div></div>
+                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"><span class="text-2xl">📱</span></div><div><div class="font-semibold">Phone</div><div class="text-gray-600">+91 9876543210</div></div></div>
+                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"><span class="text-2xl">🌐</span></div><div><div class="font-semibold">Website</div><div class="text-gray-600">www.agrisense.in</div></div></div>
+                <div class="pt-6 border-t">
+                  <h4 class="font-semibold mb-4">Follow Us</h4>
+                  <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"><span class="text-sm font-bold">f</span></a>
+                    <a href="#" class="w-10 h-10 bg-blue-400 text-white rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"><span class="text-sm font-bold">t</span></a>
+                    <a href="#" class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"><span class="text-sm font-bold">yt</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300"><div class="flex items-center space-x-3"><span class="text-xl">✅</span><span id="toastMessage">Success!</span></div></div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4"><div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"><span class="text-xl">🌱</span></div><span class="text-xl font-bold">AgriSense</span></div>
+          <p class="text-gray-300 mb-4">Empowering farmers with AI-powered agricultural solutions for sustainable and profitable farming.</p>
+          <div class="text-sm text-gray-400">© 2025 AgriSense Team | Built for Smart India Hackathon</div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="home.html" class="hover:text-green-400 transition-colors">Home</a></li>
+            <li><a href="crop-recommendation.html" class="hover:text-green-400 transition-colors">Crop Recommendation</a></li>
+            <li><a href="disease-detection.html" class="hover:text-green-400 transition-colors">Disease Detection</a></li>
+            <li><a href="about.html" class="hover:text-green-400 transition-colors">About</a></li>
+            <li><a href="contact.html" class="hover:text-green-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Features</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li>AI Crop Recommendations</li>
+            <li>Disease Detection</li>
+            <li>Yield Predictions</li>
+            <li>Market Price Analysis</li>
+            <li>Multilingual Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="common.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    // Mobile nav toggle
+    document.getElementById('mobileMenuBtn')?.addEventListener('click', () => document.getElementById('mobileNav')?.classList.toggle('hidden'));
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toastMessage');
+      msg.textContent = message;
+      toast.classList.remove('translate-y-full','opacity-0');
+      toast.classList.add('translate-y-0','opacity-100');
+      setTimeout(() => { toast.classList.add('translate-y-full','opacity-0'); toast.classList.remove('translate-y-0','opacity-100'); }, 2500);
+    }
+
+    (function initializeContactForm(){
+      const contactForm = document.getElementById('contactForm');
+      if (!contactForm) return;
+      contactForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('contactName').value;
+        document.getElementById('contactForm').reset();
+        showToast(`Thank you ${name}! Your message has been sent successfully. 📨`);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriSense - Crop Recommendation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card-hover { transition: all .3s ease }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,.15) }
+  </style>
+  <link rel="icon" href="../favicon.ico" />
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Offline Banner -->
+  <div class="bg-green-600 text-white text-center py-2 text-sm">🌐 Works Partially Offline in Low Connectivity Regions</div>
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center"><span class="text-2xl">🌱</span></div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">AgriSense</h1>
+            <p class="text-xs text-gray-600">AI Crop Recommendation System</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <select id="languageSelect" class="px-3 py-1 border border-gray-300 rounded-md text-sm">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+          </select>
+          <button id="mobileMenuBtn" class="md:hidden p-2"><span class="text-2xl">☰</span></button>
+        </div>
+      </div>
+      <nav class="hidden md:block mt-4">
+        <ul class="flex flex-wrap space-x-6 text-sm">
+          <li><a href="index.html" class="hover:text-green-600" data-translate="nav-home">Home</a></li>
+          <li><a href="crop-recommendation.html" class="text-green-600 font-medium" data-translate="nav-crop">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="hover:text-green-600" data-translate="nav-disease">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="hover:text-green-600" data-translate="nav-dashboard">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="hover:text-green-600" data-translate="nav-soil">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="hover:text-green-600" data-translate="nav-about">About</a></li>
+          <li><a href="contact.html" class="hover:text-green-600" data-translate="nav-contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav id="mobileNav" class="hidden md:hidden mt-4 border-t pt-4">
+        <ul class="space-y-2">
+          <li><a href="home.html" class="block py-2">Home</a></li>
+          <li><a href="crop-recommendation.html" class="block py-2 text-green-600 font-medium">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="block py-2">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="block py-2">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="block py-2">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="block py-2">About</a></li>
+          <li><a href="contact.html" class="block py-2">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Crop Recommendation Section -->
+    <section id="crop-recommendation" class="page-section bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-12" data-translate="crop-rec-title">AI Crop Recommendation</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Input Form -->
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <form id="cropRecommendationForm">
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium mb-2" data-translate="form-location">Location</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <select id="district" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                        <option value="">Select District</option>
+                        <option value="Bagalkot">Bagalkot</option>
+                        <option value="Belagavi">Belagavi (Belgaum)</option>
+                        <option value="Bidar">Bidar</option>
+                        <option value="Vijayapura">Bijapur (Vijayapura)</option>
+                        <option value="Dharwad">Dharwad</option>
+                        <option value="Gadag">Gadag</option>
+                        <option value="Kalaburagi">Gulbarga (Kalaburagi)</option>
+                        <option value="Haveri">Haveri</option>
+                        <option value="Koppal">Koppal</option>
+                        <option value="Raichur">Raichur</option>
+                      </select>
+                      <select id="taluk" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                        <option value="">Select Taluk</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2" data-translate="form-soil-type">Soil Type</label>
+                    <select id="soilType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                      <option value="">Select Soil Type</option>
+                      <option value="alluvial">Alluvial</option>
+                      <option value="black">Black</option>
+                      <option value="laterite">Laterite</option>
+                      <option value="red">Red</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Season</label>
+                    <select id="season" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                      <option value="">Select Season</option>
+                      <option value="rubi">Rubi</option>
+                      <option value="kharif">Kharif</option>
+                      <option value="overlapped">Overlapped</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2">NPK Levels</label>
+                    <div class="grid grid-cols-3 gap-3">
+                      <div>
+                        <input type="number" 
+                               id="nitrogen" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" 
+                               min="0" 
+                               max="300" 
+                               placeholder="N"
+                               title="Nitrogen level (0-300 kg/ha)" />
+                      </div>
+                      <div>
+                        <input type="number" 
+                               id="phosphorus" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" 
+                               min="0" 
+                               max="300" 
+                               placeholder="P"
+                               title="Phosphorus level (0-300 kg/ha)" />
+                      </div>
+                      <div>
+                        <input type="number" 
+                               id="potassium" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" 
+                               min="0" 
+                               max="300" 
+                               placeholder="K"
+                               title="Potassium level (0-300 kg/ha)" />
+                      </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Enter NPK values in kg/ha (0-300)</p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2" data-translate="form-ph">pH Level (Optional)</label>
+                    <input type="number" id="phLevel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" min="0" max="14" step="0.1" placeholder="6.5" />
+                  </div>
+                
+                  <div>
+                    <label class="block text-sm font-medium mb-2" data-translate="form-prev-crop">Previous Crop (Optional)</label>
+                    <select id="prevCrop" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                      <option value="">Select Previous Crop</option>
+                      <option value="arecanut-banana">Arecanut/Banana</option>
+                      <option value="bajra">Bajra</option>
+                      <option value="banana">Banana</option>
+                      <option value="bengalgram">Bengalgram</option>
+                      <option value="byadagi-chilli">Byadagi Chilli</option>
+                      <option value="chilli">Chilli</option>
+                      <option value="chilli-byadagi">Chilli (Byadagi speciality)</option>
+                      <option value="chillies">Chillies</option>
+                      <option value="cotton">Cotton</option>
+                      <option value="grapes">Grapes</option>
+                      <option value="groundnut">Groundnut</option>
+                      <option value="jowar">Jowar</option>
+                      <option value="jowar-sorghum">Jowar/Sorghum</option>
+                      <option value="maize">Maize</option>
+                      <option value="onion">Onion</option>
+                      <option value="paddy">Paddy</option>
+                      <option value="pigeon-pea">Pigeon pea / Tur</option>
+                      <option value="pomegranate">Pomegranate</option>
+                      <option value="pulses">Pulses</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors" data-translate="form-submit">Get Recommendation</button>
+                </div>
+              </form>
+              <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div class="flex items-start space-x-3">
+                  <div class="text-2xl">💡</div>
+                  <div>
+                    <h5 class="font-semibold text-blue-800 mb-1">Need Soil Testing?</h5>
+                    <p class="text-sm text-blue-700 mb-3">Don't know your soil NPK values and ph ? Use affordable soil testing kits (₹300) for better accuracy.</p>
+                    <a href="soil-testing.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+                      Request Testing Kit 🧪
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Results -->
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <h3 class="text-xl font-semibold mb-4" data-translate="recommendation-title">Recommendation Results</h3>
+              <div id="recommendationResult" class="text-center text-gray-500">
+                <div class="text-6xl mb-4">🌾</div>
+                <p data-translate="recommendation-placeholder">Fill out the form to get personalized crop recommendations</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Handle form submission
+    document.getElementById('cropRecommendationForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Show loading state
+      const resultDiv = document.getElementById('recommendationResult');
+      resultDiv.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-8">
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mb-4"></div>
+          <p>Analyzing your inputs...</p>
+        </div>
+      `;
+
+      // Get form data
+      const formData = new FormData();
+      formData.append('district', document.getElementById('district').value);
+      formData.append('taluq', document.getElementById('taluk').value);
+      formData.append('soil_type', document.getElementById('soilType').value);
+      formData.append('season', document.getElementById('season').value);
+      formData.append('n', document.getElementById('nitrogen').value || '0');
+      formData.append('p', document.getElementById('phosphorus').value || '0');
+      formData.append('k', document.getElementById('potassium').value || '0');
+      formData.append('ph', document.getElementById('phLevel').value || '6.5');
+
+      try {
+        // Send request to Flask backend
+        const response = await fetch('http://127.0.0.1:5000/recommend', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          },
+          mode: 'cors',
+          credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        // Function to create crop card
+        function createCropCard(crop, index) {
+          const isPrimary = index === 0;
+          const title = isPrimary ? 'Primary Recommendation' : 'Alternative Option';
+          const bgColor = isPrimary ? 'bg-green-50' : 'bg-blue-50';
+          const borderColor = isPrimary ? 'border-green-100' : 'border-blue-100';
+          const textColor = isPrimary ? 'text-green-700' : 'text-blue-700';
+          
+          return `
+            <div class="space-y-4">
+              <div class="text-center">
+                <h4 class="text-gray-500 text-sm mb-1">${data.location || 'Your Location'}</h4>
+                <h3 class="text-xl font-bold ${textColor}">${crop.crop_name || 'No recommendation'}</h3>
+                <span class="inline-block px-3 py-1 text-xs font-medium rounded-full ${isPrimary ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'} mt-1">
+                  ${title}
+                </span>
+              </div>
+              
+              <div class="${bgColor} p-4 rounded-lg border ${borderColor}">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="text-center p-3 bg-white rounded-lg">
+                    <div class="text-gray-500 text-sm">Yield Potential</div>
+                    <div class="font-semibold">${crop.yield_data || 'N/A'}</div>
+                  </div>
+                  <div class="text-center p-3 bg-white rounded-lg">
+                    <div class="text-gray-500 text-sm">Market Price</div>
+                    <div class="font-semibold">${crop.market_price || 'N/A'}</div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-3">
+                  <div class="text-center p-3 bg-white rounded-lg">
+                    <div class="text-gray-500 text-sm">Profit Potential</div>
+                    <div class="font-semibold">${crop.profit_margin || 'N/A'}</div>
+                  </div>
+                  <div class="text-center p-3 bg-white rounded-lg">
+                    <div class="text-gray-500 text-sm">Sustainability</div>
+                    <div class="font-semibold">${crop.sustainability || 'N/A'}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        // Display results with both primary and alternative crops
+        resultDiv.innerHTML = `
+          <div class="space-y-8">
+            ${createCropCard(data, 0)}
+            ${data.alternative_crop ? createCropCard(data.alternative_crop, 1) : ''}
+          </div>
+
+            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
+              <h4 class="font-medium text-yellow-800 mb-2">🌱 Growing Tips</h4>
+              <ul class="text-sm text-yellow-700 space-y-1">
+                <li>• Test soil before planting for best results</li>
+                <li>• Consider crop rotation for better yield</li>
+                <li>• Monitor weather forecasts regularly</li>
+                <li>• Consult local agriculture experts</li>
+              </ul>
+            </div>
+          </div>
+        `;
+
+        // Show success toast
+        showToast('Recommendation generated successfully!');
+
+      } catch (error) {
+        console.error('Error:', error);
+        resultDiv.innerHTML = `
+          <div class="text-center text-red-600 p-4 bg-red-50 rounded-lg">
+            <div class="text-4xl mb-2">⚠️</div>
+            <h3 class="font-medium">Error getting recommendation</h3>
+            <p class="text-sm text-gray-600 mt-1">${error.message || 'Please try again later'}</p>
+            <button onclick="window.location.reload()" class="mt-3 text-sm text-green-600 hover:underline">
+              Try Again
+            </button>
+          </div>
+        `;
+      }
+    });
+  </script>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300">
+    <div class="flex items-center space-x-3">
+      <span class="text-xl">✅</span>
+      <span id="toastMessage">Success!</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4"><div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"><span class="text-xl">🌱</span></div><span class="text-xl font-bold">AgriSense</span></div>
+          <p class="text-gray-300 mb-4">Empowering farmers with AI-powered agricultural solutions for sustainable and profitable farming.</p>
+          <div class="text-sm text-gray-400">© 2025 AgriSense Team | Built for Smart India Hackathon</div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="home.html" class="hover:text-green-400 transition-colors">Home</a></li>
+            <li><a href="crop-recommendation.html" class="hover:text-green-400 transition-colors">Crop Recommendation</a></li>
+            <li><a href="disease-detection.html" class="hover:text-green-400 transition-colors">Disease Detection</a></li>
+            <li><a href="about.html" class="hover:text-green-400 transition-colors">About</a></li>
+            <li><a href="contact.html" class="hover:text-green-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Features</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li>AI Crop Recommendations</li>
+            <li>Disease Detection</li>
+            <li>Yield Predictions</li>
+            <li>Market Price Analysis</li>
+            <li>Multilingual Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="common.js"></script>
+  <script src="js/location-handler.js"></script>
+  <script>
+    // Toast notification function
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      
+      if (!toast || !toastMessage) return;
+      
+      toastMessage.textContent = message;
+      toast.classList.remove('translate-y-full', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-full', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2500);
+    }
+    (function initLocationSelectors(){
+      const districtEl = document.getElementById('district');
+      const talukEl = document.getElementById('taluk');
+      if (!districtEl || !talukEl) return;
+
+      function populateTaluks(district) {
+        talukEl.innerHTML = '<option value="">Select Taluk</option>';
+        const taluks = TALUKS_BY_DISTRICT[district] || [];
+        taluks.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t;
+          opt.textContent = t;
+          talukEl.appendChild(opt);
+        });
+      }
+
+      districtEl.addEventListener('change', () => populateTaluks(districtEl.value));
+      // Optional: pre-populate if district preselected
+      if (districtEl.value) populateTaluks(districtEl.value);
+    })();
+
+    // Form validation
+    (function initCropForm(){
+      const form = document.getElementById('cropRecommendationForm');
+      if (!form) return;
+      
+      form.addEventListener('submit', function(e) {
+        const district = (document.getElementById('district')?.value || '').trim();
+        const taluk = (document.getElementById('taluk')?.value || '').trim();
+        
+        if (!district) {
+          e.preventDefault();
+          showToast('Please select District');
+          document.getElementById('district').focus();
+          return false;
+        }
+        if (!taluk) {
+          e.preventDefault();
+          showToast('Please select Taluk');
+          document.getElementById('taluk').focus();
+          return false;
+        }
+        return true;
+      });
+    })();
+  </script>
+  <script src="crop-recommendation.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>

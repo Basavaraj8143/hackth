@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriSense - Soil Testing Kit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card-hover { transition: all .3s ease }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,.15) }
+    .pulse-green { animation: pulseGreen 2s infinite }
+    @keyframes pulseGreen { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.7)} 70%{box-shadow:0 0 0 10px rgba(34,197,94,0)} }
+  </style>
+  <link rel="icon" href="../favicon.ico" />
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Offline Banner -->
+  <div class="bg-green-600 text-white text-center py-2 text-sm">🌐 Works Partially Offline in Low Connectivity Regions</div>
+  
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center"><span class="text-2xl">🌱</span></div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">AgriSense</h1>
+            <p class="text-xs text-gray-600">AI Crop Recommendation System</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <select id="languageSelect" class="px-3 py-1 border border-gray-300 rounded-md text-sm">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+          </select>
+          <button id="mobileMenuBtn" class="md:hidden p-2"><span class="text-2xl">☰</span></button>
+        </div>
+      </div>
+      <nav class="hidden md:block mt-4">
+        <ul class="flex flex-wrap space-x-6 text-sm">
+          <li><a href="index.html" class="hover:text-green-600" data-translate="nav-home">Home</a></li>
+          <li><a href="crop-recommendation.html" class="hover:text-green-600" data-translate="nav-crop">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="hover:text-green-600" data-translate="nav-disease">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="hover:text-green-600" data-translate="nav-dashboard">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="text-green-600 font-medium" data-translate="nav-soil">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="hover:text-green-600" data-translate="nav-about">About</a></li>
+          <li><a href="contact.html" class="hover:text-green-600" data-translate="nav-contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav id="mobileNav" class="hidden md:hidden mt-4 border-t pt-4">
+        <ul class="space-y-2">
+          <li><a href="index.html" class="block py-2">Home</a></li>
+          <li><a href="crop-recommendation.html" class="block py-2">Crop Recommendation</a></li>
+          <li><a href="disease-detection.html" class="block py-2">Disease Detection</a></li>
+          <li><a href="dashboard.html" class="block py-2">Dashboard</a></li>
+          <li><a href="soil-testing.html" class="block py-2 text-green-600 font-medium">Soil Testing Kit</a></li>
+          <li><a href="about.html" class="block py-2">About</a></li>
+          <li><a href="contact.html" class="block py-2">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-green-500 to-green-600 text-white py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="text-6xl mb-4">🧪</div>
+          <h2 class="text-4xl font-bold mb-4" data-translate="soil-hero-title">Affordable Soil Testing Kit</h2>
+          <p class="text-xl mb-6" data-translate="soil-hero-subtitle">Know your soil better for smarter farming decisions</p>
+          <div class="bg-white bg-opacity-20 rounded-lg p-6 inline-block mb-6">
+            <div class="text-5xl font-bold mb-2">₹300</div>
+            <div class="text-lg">Complete Soil Analysis Kit</div>
+          </div>
+          <div>
+            <a href="#requestForm" class="inline-block bg-white text-green-600 hover:bg-green-50 px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all transform hover:scale-105" data-translate="soil-cta-button">
+              Request Your Kit Now 📦
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Soil Testing Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h3 class="text-3xl font-bold text-center mb-12" data-translate="soil-why-title">Why Soil Testing Matters?</h3>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-green-50 rounded-xl p-6 card-hover">
+              <div class="text-4xl mb-4">📊</div>
+              <h4 class="text-xl font-semibold mb-3">Accurate NPK Levels</h4>
+              <p class="text-gray-600">Get precise Nitrogen, Phosphorus, and Potassium measurements for optimal fertilizer application</p>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-6 card-hover">
+              <div class="text-4xl mb-4">💰</div>
+              <h4 class="text-xl font-semibold mb-3">Save Money</h4>
+              <p class="text-gray-600">Avoid over-fertilization and reduce input costs by up to 30%</p>
+            </div>
+            <div class="bg-purple-50 rounded-xl p-6 card-hover">
+              <div class="text-4xl mb-4">🌱</div>
+              <h4 class="text-xl font-semibold mb-3">Better Yields</h4>
+              <p class="text-gray-600">Increase crop productivity by 20-40% with data-driven soil management</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kit Details Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h3 class="text-3xl font-bold text-center mb-12" data-translate="soil-whats-included">What's Included in the Kit?</h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h4 class="text-2xl font-semibold mb-6 text-green-600">Testing Parameters</h4>
+              <ul class="space-y-4">
+                <li class="flex items-center"><span class="text-green-500 text-2xl mr-3">✓</span><span class="text-lg"><strong>Nitrogen (N)</strong> - Essential for leaf growth</span></li>
+                <li class="flex items-center"><span class="text-green-500 text-2xl mr-3">✓</span><span class="text-lg"><strong>Phosphorus (P)</strong> - Root development</span></li>
+                <li class="flex items-center"><span class="text-green-500 text-2xl mr-3">✓</span><span class="text-lg"><strong>Potassium (K)</strong> - Overall plant health</span></li>
+                <li class="flex items-center"><span class="text-green-500 text-2xl mr-3">✓</span><span class="text-lg"><strong>pH Level</strong> - Soil acidity/alkalinity</span></li>
+                <li class="flex items-center"><span class="text-green-500 text-2xl mr-3">✓</span><span class="text-lg"><strong>Organic Matter</strong> - Soil fertility</span></li>
+              </ul>
+            </div>
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h4 class="text-2xl font-semibold mb-6 text-blue-600">Kit Contents</h4>
+              <ul class="space-y-4">
+                <li class="flex items-center"><span class="text-blue-500 text-2xl mr-3">📦</span><span class="text-lg">Test tubes and reagents</span></li>
+                <li class="flex items-center"><span class="text-blue-500 text-2xl mr-3">📦</span><span class="text-lg">Color comparison charts</span></li>
+                <li class="flex items-center"><span class="text-blue-500 text-2xl mr-3">📦</span><span class="text-lg">Soil sampling tools</span></li>
+                <li class="flex items-center"><span class="text-blue-500 text-2xl mr-3">📦</span><span class="text-lg">Instruction manual (3 languages)</span></li>
+                <li class="flex items-center"><span class="text-blue-500 text-2xl mr-3">📦</span><span class="text-lg">Result recording sheet</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Request Form Section -->
+    <section id="requestForm" class="py-16 bg-white scroll-mt-20">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h3 class="text-3xl font-bold text-center mb-4" data-translate="soil-request-title">Request Your Soil Testing Kit</h3>
+          <p class="text-center text-gray-600 mb-12" data-translate="soil-request-subtitle">Fill out the form below and we'll deliver the kit to your doorstep within 3-5 business days</p>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Request Form -->
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-green-100">
+              <form id="soilKitRequestForm">
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Full Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="farmerName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Enter your full name" required />
+                  </div>
+                  
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Mobile Number <span class="text-red-500">*</span></label>
+                    <input type="tel" id="mobileNumber" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="10-digit mobile number" pattern="[0-9]{10}" required />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Location <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-2 gap-3">
+                      <select id="district" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                        <option value="">Select District</option>
+                        <option value="Bagalkot">Bagalkot</option>
+                        <option value="Belagavi">Belagavi (Belgaum)</option>
+                        <option value="Bidar">Bidar</option>
+                        <option value="Vijayapura">Bijapur (Vijayapura)</option>
+                        <option value="Dharwad">Dharwad</option>
+                        <option value="Gadag">Gadag</option>
+                        <option value="Kalaburagi">Gulbarga (Kalaburagi)</option>
+                        <option value="Haveri">Haveri</option>
+                        <option value="Koppal">Koppal</option>
+                        <option value="Raichur">Raichur</option>
+                      </select>
+                      <select id="taluk" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                        <option value="">Select Taluk</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Village/Area <span class="text-red-500">*</span></label>
+                    <input type="text" id="village" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Enter village or area name" required />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Pincode <span class="text-red-500">*</span></label>
+                    <input type="text" id="pincode" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="6-digit pincode" pattern="[0-9]{6}" required />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Number of Kits <span class="text-red-500">*</span></label>
+                    <select id="kitQuantity" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" required>
+                      <option value="1">1 Kit - ₹300</option>
+                      <option value="2">2 Kits - ₹550 (Save ₹50)</option>
+                      <option value="3">3 Kits - ₹750 (Save ₹150)</option>
+                      <option value="5">5 Kits - ₹1200 (Save ₹300)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Farm Size (in acres)</label>
+                    <input type="number" id="farmSize" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Optional" min="0" step="0.5" />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Additional Notes</label>
+                    <textarea id="additionalNotes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Any special instructions or questions..."></textarea>
+                  </div>
+
+                  <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors pulse-green">
+                    Request Soil Testing Kit 🧪
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Order Summary & Benefits -->
+            <div class="space-y-6">
+              <div class="bg-green-50 rounded-xl p-6 border-2 border-green-200">
+                <h4 class="text-xl font-semibold mb-4 text-green-800">📦 Delivery Information</h4>
+                <ul class="space-y-3 text-gray-700">
+                  <li class="flex items-start"><span class="text-green-600 mr-2">✓</span><span><strong>Free Delivery</strong> across Karnataka</span></li>
+                  <li class="flex items-start"><span class="text-green-600 mr-2">✓</span><span><strong>3-5 Business Days</strong> delivery time</span></li>
+                  <li class="flex items-start"><span class="text-green-600 mr-2">✓</span><span><strong>Cash on Delivery</strong> available</span></li>
+                  <li class="flex items-start"><span class="text-green-600 mr-2">✓</span><span><strong>SMS Tracking</strong> updates</span></li>
+                </ul>
+              </div>
+
+              <div class="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+                <h4 class="text-xl font-semibold mb-4 text-blue-800">🎓 Free Training Included</h4>
+                <ul class="space-y-3 text-gray-700">
+                  <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span><span>Video tutorial in your language</span></li>
+                  <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span><span>24/7 helpline support</span></li>
+                  <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span><span>Result interpretation guide</span></li>
+                  <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span><span>Fertilizer recommendation chart</span></li>
+                </ul>
+              </div>
+
+              <div class="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
+                <h4 class="text-xl font-semibold mb-4 text-orange-800">💡 Pro Tip</h4>
+                <p class="text-gray-700">Test your soil at the beginning of each season for best results. Multiple kits help you test different parts of your farm!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h3 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h3>
+          <div class="space-y-4">
+            <div class="bg-white rounded-lg p-6 shadow-md">
+              <h5 class="font-semibold text-lg mb-2">How accurate is the soil testing kit?</h5>
+              <p class="text-gray-600">Our kits provide 85-90% accuracy compared to laboratory tests, which is sufficient for most farming decisions.</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-md">
+              <h5 class="font-semibold text-lg mb-2">Can I reuse the kit?</h5>
+              <p class="text-gray-600">The kit includes reagents for 10-15 tests. Additional reagent refills are available at ₹100.</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-md">
+              <h5 class="font-semibold text-lg mb-2">Is training required to use the kit?</h5>
+              <p class="text-gray-600">No special training needed! The kit comes with simple picture-based instructions and video tutorials.</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-md">
+              <h5 class="font-semibold text-lg mb-2">What payment methods are accepted?</h5>
+              <p class="text-gray-600">We accept Cash on Delivery, UPI, Net Banking, and all major credit/debit cards.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Enhanced Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 w-80 bg-white rounded-xl shadow-xl overflow-hidden transform translate-y-32 opacity-0 transition-all duration-300 z-50 border border-green-100">
+    <div class="flex items-start">
+      <!-- Left Border -->
+      <div class="bg-green-500 w-2 h-full"></div>
+      
+      <!-- Icon -->
+      <div class="p-4 text-green-500">
+        <div id="toastIcon" class="flex items-center justify-center h-8 w-8 rounded-full bg-green-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Message -->
+      <div class="flex-1 py-4 pr-4">
+        <h3 id="toastTitle" class="font-semibold text-gray-800">Success!</h3>
+        <p id="toastMessage" class="text-sm text-gray-600 mt-1"></p>
+      </div>
+      
+      <!-- Close Button -->
+      <button onclick="document.getElementById('toast').classList.add('translate-y-32', 'opacity-0')" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 focus:outline-none">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <!-- Progress Bar -->
+      <div class="absolute bottom-0 left-0 right-0 h-1 bg-green-100 overflow-hidden">
+        <div id="toastProgress" class="h-full bg-green-500 w-0 transition-all duration-300"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"><span class="text-xl">🌱</span></div>
+            <span class="text-xl font-bold">AgriSense</span>
+          </div>
+          <p class="text-gray-300 mb-4">Empowering farmers with AI-powered agricultural solutions for sustainable and profitable farming.</p>
+          <div class="text-sm text-gray-400">© 2025 AgriSense Team | Built for Smart India Hackathon</div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="index.html" class="hover:text-green-400 transition-colors">Home</a></li>
+            <li><a href="crop-recommendation.html" class="hover:text-green-400 transition-colors">Crop Recommendation</a></li>
+            <li><a href="disease-detection.html" class="hover:text-green-400 transition-colors">Disease Detection</a></li>
+            <li><a href="soil-testing.html" class="hover:text-green-400 transition-colors">Soil Testing Kit</a></li>
+            <li><a href="about.html" class="hover:text-green-400 transition-colors">About</a></li>
+            <li><a href="contact.html" class="hover:text-green-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Features</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li>AI Crop Recommendations</li>
+            <li>Disease Detection</li>
+            <li>Yield Predictions</li>
+            <li>Soil Testing Kits</li>
+            <li>Market Price Analysis</li>
+            <li>Multilingual Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </footer>
+
+    <script src="common.js"></script>
+  <script src="chatbot.js"></script>
+  <script src="js/location-handler.js"></script>
+  <script>
+    // Enhanced toast notification function
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+      const toastProgress = document.getElementById('toastProgress');
+      
+      if (!toast || !toastMessage || !toastTitle || !toastIcon || !toastProgress) return;
+      
+      // Set message and title
+      toastMessage.textContent = message;
+      
+      // Set styles based on type
+      if (type === 'error') {
+        toastTitle.textContent = 'Error!';
+        toastIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+        `;
+        toastIcon.className = 'flex items-center justify-center h-8 w-8 rounded-full bg-red-100 text-red-500';
+        toast.querySelector('.bg-green-500').classList.replace('bg-green-500', 'bg-red-500');
+        toastProgress.classList.replace('bg-green-500', 'bg-red-500');
+      } else {
+        toastTitle.textContent = 'Success!';
+        toastIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        `;
+        toastIcon.className = 'flex items-center justify-center h-8 w-8 rounded-full bg-green-100 text-green-500';
+        toast.querySelector('.bg-red-500')?.classList.replace('bg-red-500', 'bg-green-500');
+        toastProgress.classList.replace('bg-red-500', 'bg-green-500');
+      }
+      
+      // Show toast with animation
+      toast.classList.remove('translate-y-32', 'opacity-0');
+      toast.classList.add('opacity-100');
+      
+      // Reset and animate progress bar
+      toastProgress.style.width = '0%';
+      setTimeout(() => {
+        toastProgress.style.width = '100%';
+      }, 10);
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        toast.classList.add('translate-y-32', 'opacity-0');
+      }, 5000);
+    }
+    
+  </script>
+  <script>
+    // Mobile nav toggle and form submission handler
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle mobile menu
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      
+      if (mobileMenuBtn && mobileNav) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileNav.classList.toggle('hidden');
+        });
+      }
+
+      // Form submission handler
+      const form = document.getElementById('soilKitRequestForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          // Get form values
+          const farmerName = document.getElementById('farmerName').value.trim();
+          const mobileNumber = document.getElementById('mobileNumber').value.trim();
+          const district = document.getElementById('district').value;
+          const taluk = document.getElementById('taluk').value;
+          const village = document.getElementById('village').value.trim();
+          const pincode = document.getElementById('pincode').value.trim();
+          const kitQuantity = document.getElementById('kitQuantity').value;
+
+          // Validation
+          if (!farmerName || !mobileNumber || !district || !taluk || !village || !pincode) {
+            showToast('Please fill all required fields', 'error');
+            return false;
+          }
+
+          if (mobileNumber.length !== 10 || !/^\d{10}$/.test(mobileNumber)) {
+            showToast('Please enter a valid 10-digit mobile number', 'error');
+            document.getElementById('mobileNumber').focus();
+            return false;
+          }
+
+          if (pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
+            showToast('Please enter a valid 6-digit pincode', 'error');
+            document.getElementById('pincode').focus();
+            return false;
+          }
+
+          // Calculate price
+          const prices = { '1': 300, '2': 550, '3': 750, '5': 1200 };
+          const totalPrice = prices[kitQuantity] || 300;
+
+          // Create request data
+          const requestData = {
+            name: farmerName,
+            mobile: mobileNumber,
+            location: `${village}, ${taluk}, ${district}`,
+            pincode: pincode,
+            quantity: kitQuantity,
+            totalPrice: totalPrice,
+            timestamp: new Date().toISOString()
+          };
+
+          // Store in localStorage (for demo purposes)
+          try {
+            const existingRequests = JSON.parse(localStorage.getItem('soilKitRequests') || '[]');
+            existingRequests.push(requestData);
+            localStorage.setItem('soilKitRequests', JSON.stringify(existingRequests));
+          } catch (e) {
+            console.error('Error saving to localStorage:', e);
+          }
+
+          // Show success message
+          showToast('Your soil testing kit request has been submitted successfully! We will contact you shortly.');
+          
+          // Show confirmation alert
+          setTimeout(() => {
+            alert(`🎉 Thank you ${farmerName}!\n\nYour soil testing kit request has been received.\n\nOrder Details:\n• Quantity: ${kitQuantity} kit(s)\n• Total Amount: ₹${totalPrice}\n• Delivery to: ${village}, ${taluk}\n\nYou will receive a confirmation SMS on ${mobileNumber} within 24 hours.\n\nDelivery Time: 3-5 business days\nPayment: Cash on Delivery`);
+          }, 500);
+
+          // Reset form
+          form.reset();
+          
+          // Prevent default form submission
+          return false;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
